@@ -1095,7 +1095,7 @@ export default {
 
     isSelected(node) {
       // whether a node is selected (single-select mode) or fully-checked (multi-select mode)
-      return this.forest.selectedNodeMap[node.id] === true
+      return node && this.forest.selectedNodeMap[node.id] === true
     },
 
     traverseDescendantsBFS(parentNode, callback) {
