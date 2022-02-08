@@ -14,7 +14,6 @@
   export default {
     name: 'vue-treeselect--menu',
     inject: [ 'instance' ],
-
     computed: {
       menuStyle() {
         const { instance } = this
@@ -42,6 +41,9 @@
           this.onMenuClose()
         }
       },
+      'instance.forest'(newValue) {
+        console.log('instance forest', newValue);
+      }
     },
 
     created() {
@@ -66,7 +68,7 @@
         if (!instance.menu.isOpen) return null
 
         return (
-          <div ref="menu" class="vue-treeselect__menu" onMousedown={instance.handleMouseDown} style={this.menuStyle}>
+          <div key={instance.key} ref="menu" class="vue-treeselect__menu" onMousedown={instance.handleMouseDown} style={this.menuStyle}>
             {this.renderBeforeList()}
             {instance.async
               ? this.renderAsyncSearchMenuInner()
