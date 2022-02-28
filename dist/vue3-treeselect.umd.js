@@ -4576,6 +4576,10 @@ var instanceId = 0;
       type: Boolean,
       default: false
     },
+    selectAllOption: {
+      type: Boolean,
+      default: false
+    },
 
     /**
      * Whether the menu should be always open.
@@ -4876,6 +4880,10 @@ var instanceId = 0;
     maxHeight: {
       type: Number,
       default: 300
+    },
+    minChar: {
+      type: Number,
+      default: 1
     },
 
     /**
@@ -5766,38 +5774,42 @@ var instanceId = 0;
         _this12.resetHighlightedOptionWhenNecessary(true);
       };
 
-      if ((searchQuery === '' || this.cacheOptions) && entry.isLoaded) {
+      console.log(searchQuery, this.minChar);
+
+      if ((searchQuery === "" && this.minChar > 0 || this.cacheOptions) && entry.isLoaded) {
         return done();
       }
 
-      this.callLoadOptionsProp({
-        action: ASYNC_SEARCH,
-        args: {
-          searchQuery: searchQuery
-        },
-        isPending: function isPending() {
-          return entry.isLoading;
-        },
-        start: function start() {
-          entry.isLoading = true;
-          entry.isLoaded = false;
-          entry.loadingError = '';
-        },
-        succeed: function succeed(options) {
-          entry.isLoaded = true;
-          entry.options = options; // When the request completes, the search query may have changed.
-          // We only show these options if they are for the current search query.
+      if (searchQuery.length >= this.minChar) {
+        this.callLoadOptionsProp({
+          action: ASYNC_SEARCH,
+          args: {
+            searchQuery: searchQuery
+          },
+          isPending: function isPending() {
+            return entry.isLoading;
+          },
+          start: function start() {
+            entry.isLoading = true;
+            entry.isLoaded = false;
+            entry.loadingError = '';
+          },
+          succeed: function succeed(options) {
+            entry.isLoaded = true;
+            entry.options = options; // When the request completes, the search query may have changed.
+            // We only show these options if they are for the current search query.
 
-          if (_this12.trigger.searchQuery === searchQuery) done();
-        },
-        fail: function fail(err) {
-          entry.loadingError = getErrorMessage(err);
-        },
-        end: function end() {
-          entry.isLoading = false;
-          _this66.key += 1;
-        }
-      });
+            if (_this12.trigger.searchQuery === searchQuery) done();
+          },
+          fail: function fail(err) {
+            entry.loadingError = getErrorMessage(err);
+          },
+          end: function end() {
+            entry.isLoading = false;
+            _this66.key += 1;
+          }
+        });
+      }
     },
     getRemoteSearchEntry: function getRemoteSearchEntry() {
       var _this13 = this;
@@ -5818,7 +5830,7 @@ var instanceId = 0;
         deep: true
       });
 
-      if (searchQuery === '') {
+      if (searchQuery === '' && this.minChar > 0) {
         if (Array.isArray(this.defaultOptions)) {
           entry.options = this.defaultOptions;
           entry.isLoaded = true;
@@ -5942,6 +5954,8 @@ var instanceId = 0;
       this.$nextTick(this.resetHighlightedOptionWhenNecessary);
       this.$nextTick(this.restoreMenuScrollPosition);
       if (!this.options && !this.async) this.loadRootOptions();
+      console.log(this.minChar);
+      if (this.minChar == 0 && this.async) this.handleRemoteSearch();
       this.toggleClickOutsideEvent(true);
       this.$emit('open', this.getInstanceId());
     },
@@ -7828,6 +7842,7 @@ const Option_exports_ = Optionvue_type_script_lang_js;
 
 
 
+
 function Menuvue_type_script_lang_js_isSlot(s) {
   return typeof s === 'function' || Object.prototype.toString.call(s) === '[object Object]' && !Object(external_commonjs_vue_commonjs2_vue_root_Vue_["isVNode"])(s);
 }
@@ -7933,7 +7948,7 @@ var directionMap = {
     renderAsyncSearchMenuInner: function renderAsyncSearchMenuInner() {
       var instance = this.instance;
       var entry = instance.getRemoteSearchEntry();
-      var shouldShowSearchPromptTip = instance.trigger.searchQuery === '' && !instance.defaultOptions;
+      var shouldShowSearchPromptTip = instance.trigger.searchQuery === '' && !instance.defaultOptions && instance.minChar > 0;
       var shouldShowNoResultsTip = shouldShowSearchPromptTip ? false : entry.isLoaded && entry.options.length === 0;
 
       if (shouldShowSearchPromptTip) {
@@ -7953,7 +7968,26 @@ var directionMap = {
       var instance = this.instance;
       return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])("div", {
         "class": "vue-treeselect__list"
-      }, [instance.forest.normalizedOptions.map(function (rootNode) {
+      }, [instance.selectAllOption && Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])("div", {
+        "class": "vue-treeselect__list-item"
+      }, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])("div", {
+        "class": "vue-treeselect__option vue-treeselect__option--selected",
+        "data-id": "-1"
+      }, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])("div", {
+        "class": "vue-treeselect__option-arrow-placeholder"
+      }, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createTextVNode"])("\xA0")]), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])("div", {
+        "class": "vue-treeselect__label-container"
+      }, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])("div", {
+        "class": "vue-treeselect__checkbox-container"
+      }, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])("span", {
+        "class": "vue-treeselect__checkbox vue-treeselect__checkbox--checked"
+      }, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])("span", {
+        "class": "vue-treeselect__check-mark"
+      }, null), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])("span", {
+        "class": "vue-treeselect__minus-mark"
+      }, null)])]), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])("label", {
+        "class": "vue-treeselect__label"
+      }, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createTextVNode"])("Tous")])])])]), instance.forest.normalizedOptions.map(function (rootNode) {
         return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])(components_Option, {
           "node": rootNode,
           "key": rootNode.id

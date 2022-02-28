@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <vue-treeselect :multiple="false" :async="true" :loadOptions="loadOptions" noResultsText="No results..."
+    <vue-treeselect :minChar="0" :multiple="false" :async="true" :loadOptions="loadOptions" noResultsText="No results..."
                     placeholder="Select items..."
                     >
 

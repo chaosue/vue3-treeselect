@@ -86,6 +86,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    selectAllOption: {
+      type: Boolean,
+      default: false,
+    },
 
     /**
      * Whether the menu should be always open.
@@ -383,6 +387,10 @@ export default {
     maxHeight: {
       type: Number,
       default: 300,
+    },
+    minChar: {
+      type: Number,
+      default: 1,
     },
 
     /**
@@ -1277,37 +1285,38 @@ export default {
         this.initialize()
         this.resetHighlightedOptionWhenNecessary(true)
       }
-
-      if ((searchQuery === '' || this.cacheOptions) && entry.isLoaded) {
+      console.log(searchQuery, this.minChar);
+      if (((searchQuery === "" && this.minChar > 0) || this.cacheOptions) && entry.isLoaded) {
         return done()
       }
-
-      this.callLoadOptionsProp({
-        action: ASYNC_SEARCH,
-        args: { searchQuery },
-        isPending() {
-          return entry.isLoading
-        },
-        start: () => {
-          entry.isLoading = true
-          entry.isLoaded = false
-          entry.loadingError = ''
-        },
-        succeed: options => {
-          entry.isLoaded = true
-          entry.options = options
-          // When the request completes, the search query may have changed.
-          // We only show these options if they are for the current search query.
-          if (this.trigger.searchQuery === searchQuery) done()
-        },
-        fail: err => {
-          entry.loadingError = getErrorMessage(err)
-        },
-        end: () => {
-          entry.isLoading = false
-          _this66.key += 1;
-        },
-      })
+      if (searchQuery.length >= this.minChar) {
+        this.callLoadOptionsProp({
+          action: ASYNC_SEARCH,
+          args: { searchQuery },
+          isPending() {
+            return entry.isLoading
+          },
+          start: () => {
+            entry.isLoading = true
+            entry.isLoaded = false
+            entry.loadingError = ''
+          },
+          succeed: options => {
+            entry.isLoaded = true
+            entry.options = options
+            // When the request completes, the search query may have changed.
+            // We only show these options if they are for the current search query.
+            if (this.trigger.searchQuery === searchQuery) done()
+          },
+          fail: err => {
+            entry.loadingError = getErrorMessage(err)
+          },
+          end: () => {
+            entry.isLoading = false
+            _this66.key += 1;
+          },
+        })
+      }
     },
 
     getRemoteSearchEntry() {
@@ -1327,7 +1336,7 @@ export default {
         { deep: true },
       )
 
-      if (searchQuery === '') {
+      if (searchQuery === '' && this.minChar > 0) {
         if (Array.isArray(this.defaultOptions)) {
           entry.options = this.defaultOptions
           entry.isLoaded = true
@@ -1466,6 +1475,8 @@ export default {
       this.$nextTick(this.resetHighlightedOptionWhenNecessary)
       this.$nextTick(this.restoreMenuScrollPosition)
       if (!this.options && !this.async) this.loadRootOptions()
+      console.log(this.minChar);
+      if (this.minChar == 0 && this.async) this.handleRemoteSearch();
       this.toggleClickOutsideEvent(true)
       this.$emit('open', this.getInstanceId())
     },
