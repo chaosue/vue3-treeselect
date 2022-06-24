@@ -1,6 +1,6 @@
 {
   "name": "@bosquig/vue3-treeselect",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Tree select hierarchical component for vue 3 (next)",
   "main": "dist/vue3-treeselect.common.js",
   "unpkg": "dist/vue3-treeselect.umd.js",

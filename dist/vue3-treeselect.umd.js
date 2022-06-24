@@ -5478,6 +5478,7 @@ var instanceId = 0;
         isRootNode: true,
         isLeaf: true,
         isBranch: false,
+        canSelectChildrenEvenIfDisabled: false,
         isDisabled: false,
         isNew: false,
         index: [-1],
@@ -6029,12 +6030,13 @@ var instanceId = 0;
         var id = node.id,
             label = node.label,
             children = node.children,
-            isDefaultExpanded = node.isDefaultExpanded;
+            isDefaultExpanded = node.isDefaultExpanded,
+            canSelectChildrenEvenIfDisabled = node.canSelectChildrenEvenIfDisabled;
         var isRootNode = parentNode === NO_PARENT_NODE;
         var level = isRootNode ? 0 : parentNode.level + 1;
         var isBranch = Array.isArray(children) || children === null;
         var isLeaf = !isBranch;
-        var isDisabled = !!node.isDisabled || !_this16.flat && !isRootNode && parentNode.isDisabled;
+        var isDisabled = !!node.isDisabled || !_this16.flat && !isRootNode && parentNode.isDisabled && !parentNode.canSelectChildrenEvenIfDisabled;
         var isNew = !!node.isNew;
 
         var lowerCased = _this16.matchKeys.reduce(function (prev, key) {
@@ -6054,6 +6056,7 @@ var instanceId = 0;
         normalized.lowerCased = lowerCased;
         normalized.nestedSearchLabel = nestedSearchLabel;
         normalized.isDisabled = isDisabled;
+        normalized.canSelectChildrenEvenIfDisabled = canSelectChildrenEvenIfDisabled;
         normalized.isNew = isNew;
         normalized.isMatched = false;
         normalized.isHighlighted = false;
@@ -6399,7 +6402,7 @@ var instanceId = 0;
         var curr = node;
 
         while ((curr = curr.parentNode) !== NO_PARENT_NODE) {
-          if (curr.children.every(this.isSelected)) this.addValue(curr);else break;
+          if (curr.children.every(this.isSelected) && !curr.isDisabled) this.addValue(curr);else break;
         }
       }
     },
