@@ -1,6 +1,6 @@
-<script>
+<script lang="tsx">
   import { onLeftClick } from '../utils'
-  import DeleteIcon from './icons/Delete'
+  import DeleteIcon from './icons/Delete.vue'
 
   export default {
     name: 'vue-treeselect--multi-value-item',

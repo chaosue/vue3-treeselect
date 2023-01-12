@@ -1,4 +1,26 @@
 # vue3-treeselect
+## Improvements from VEIGIT
+### features
+* move to vue3.2+vite.
+* demo with realtime debug sources. 
+### usage
+* dev debug
+  ```bash
+  npm run serve
+  ```
+* import
+  ```bash
+  npm install --save vue3-veigit-treeselect
+  ```
+   you may need to define the package dist in packages.json, as this package may not be uploaded npm repo.
+   ``` json
+   {
+     "dependencies":{
+        "vue3-veigit-treeselect": ""
+     }
+   }
+   ```
+## Below is the original content that refers to more helpful documents.
 [![npm](https://badgen.now.sh/npm/v/vue3-treeselect)](https://www.npmjs.com/package/vue3-treeselect)  [![Coverage](https://badgen.net/codecov/c/github/megafetis/vue3-treeselect)](https://codecov.io/gh/megafetis/vue3-treeselect?branch=main)
 ![npm monthly downloads](https://badgen.now.sh/npm/dm/megafetis/vue3-treeselect)
  [![Known vulnerabilities](https://snyk.io/test/npm/megafetis/vue3-treeselect/badge.svg)](https://snyk.io/test/npm/megafetis/vue3-treeselect) ![License](https://badgen.net/github/license/megafetis/vue3-treeselect)

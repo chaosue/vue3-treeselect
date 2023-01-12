@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <vue-treeselect :minChar="0" :multiple="false" :async="true" :loadOptions="loadOptions" noResultsText="No results..."
+    <vue-treeselect multiple :minChar="0" :multiple="false" :async="true" :loadOptions="loadOptions" noResultsText="No results..."
                     placeholder="Select items..."
                     >
 
@@ -13,7 +13,7 @@
 </template>
 <script>
 import { defineComponent, ref, reactive } from 'vue';
-import { ASYNC_SEARCH } from '../dist/vue3-treeselect.common';
+import { ASYNC_SEARCH } from '../src/';
 
 export default defineComponent({
 

@@ -1,8 +1,9 @@
-<script>
+<script lang="tsx">
 import { MENU_BUFFER } from '../constants'
 import { watchSize, setupResizeAndScrollEventListeners } from '../utils'
-import Option from './Option'
-import Tip from './Tip'
+import Option from './Option.vue'
+import Tip from './Tip.vue'
+import {Transition} from 'vue'
 
 const directionMap = {
   top: 'top',
@@ -320,9 +321,9 @@ export default {
   render() {
     return (
       <div ref="menu-container" class="vue-treeselect__menu-container" style={this.menuContainerStyle}>
-        <transition name="vue-treeselect__menu--transition">
+        <Transition name="vue-treeselect__menu--transition">
           {this.renderMenu()}
-        </transition>
+        </Transition>
       </div>
     )
   },

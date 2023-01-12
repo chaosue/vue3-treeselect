@@ -1,4 +1,4 @@
-import Treeselect from './components/Treeselect'
+import Treeselect from './components/Treeselect.vue'
 import treeselectMixin from './mixins/treeselectMixin'
 import '../styles/style.less'
 

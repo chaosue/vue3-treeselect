@@ -1,7 +1,7 @@
-<script>
+<script lang="tsx">
   import {createApp} from 'vue'
   import { watchSize, setupResizeAndScrollEventListeners, find } from '../utils'
-  import Menu from './Menu'
+  import Menu from './Menu.vue'
 
   const PortalTarget = {
     name: 'vue-treeselect--portal-target',

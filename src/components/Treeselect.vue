@@ -7,12 +7,12 @@
   </div>
 </template>
 
-<script>
+<script lang="tsx">
   import treeselectMixin from '../mixins/treeselectMixin'
-  import HiddenFields from './HiddenFields'
-  import Control from './Control'
-  import Menu from './Menu'
-  import MenuPortal from './MenuPortal'
+  import HiddenFields from './HiddenFields.vue'
+  import Control from './Control.vue'
+  import Menu from './Menu.vue'
+  import MenuPortal from './MenuPortal.vue'
 
   import {defineComponent,h} from 'vue';
   export default defineComponent({

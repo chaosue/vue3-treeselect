@@ -1,4 +1,4 @@
-<script>
+<script lang="tsx">
   import { isNaN } from '../utils'
   import {defineComponent} from 'vue';
 

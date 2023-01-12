@@ -1,9 +1,9 @@
-<script>
+<script lang="tsx">
   import { onLeftClick, isPromise } from '../utils'
-  import SingleValue from './SingleValue'
-  import MultiValue from './MultiValue'
-  import DeleteIcon from './icons/Delete'
-  import ArrowIcon from './icons/Arrow'
+  import SingleValue from './SingleValue.vue'
+  import MultiValue from './MultiValue.vue'
+  import DeleteIcon from './icons/Delete.vue'
+  import ArrowIcon from './icons/Arrow.vue'
 
   export default {
     name: 'vue-treeselect--control',

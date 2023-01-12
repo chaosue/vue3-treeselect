@@ -1,6 +1,6 @@
-<script>
-  import Input from './Input'
-  import Placeholder from './Placeholder'
+<script lang="tsx">
+  import Input from './Input.vue'
+  import Placeholder from './Placeholder.vue'
 
   export default {
     name: 'vue-treeselect--single-value',

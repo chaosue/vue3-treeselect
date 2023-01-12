@@ -1,7 +1,7 @@
 import {createApp } from 'vue';
 
-import VueTreeSelect from '../dist/vue3-treeselect.common';
-import '../dist/vue3-treeselect.css';
+import VueTreeSelect from '../src/components/Treeselect.vue';
+import '../styles/style.less';
 
 
 import App from './demo-app.vue';
