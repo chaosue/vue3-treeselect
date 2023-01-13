@@ -2,15 +2,15 @@
 ## Improvements from VEIGIT
 ### features
 * move to vue3.2+vite.
-* demo with realtime debug sources. 
+* demo with realtime dev debugging sources. 
 ### usage
-* dev debug
+* dev debugging
   ```bash
   npm run serve
   ```
 * import
   ```bash
-  npm install --save vue3-veigit-treeselect
+  npm install --save @veigit/vue3-treeselect 
   ```
    you may need to define the package dist in packages.json, as this package may not be uploaded to npm repo.
    ``` json
