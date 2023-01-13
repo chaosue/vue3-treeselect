@@ -12,11 +12,11 @@
   ```bash
   npm install --save vue3-veigit-treeselect
   ```
-   you may need to define the package dist in packages.json, as this package may not be uploaded npm repo.
+   you may need to define the package dist in packages.json, as this package may not be uploaded to npm repo.
    ``` json
    {
      "dependencies":{
-        "vue3-veigit-treeselect": ""
+        "@veigit/vue3-treeselect": "https://github.com/chaosue/vue3-treeselect/files/10401373/vue3-veigit-treeselect_0.2.0.zip"
      }
    }
    ```
