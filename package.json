@@ -48,9 +48,8 @@
   ],
   "homepage": "https://github.com/bosquig/vue3-treeselect",
   "files": [
-    "dist/*.js",
-    "dist/*.css",
-    "styles"
+    "dist/*",
+    "README.md"
   ],
   "keywords": [
     "vue",

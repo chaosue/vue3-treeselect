@@ -16,7 +16,7 @@
    ``` json
    {
      "dependencies":{
-        "@veigit/vue3-treeselect": "https://github.com/chaosue/vue3-treeselect/files/10401373/vue3-veigit-treeselect_0.2.0.zip"
+        "@veigit/vue3-treeselect": "https://github.com/chaosue/vue3-treeselect/releases/download/0.2.0/npm_veigit-vue3-treeselect-0.2.0.tgz"
      }
    }
    ```
